@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('addons', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->decimal('price', 10, 2);
+            $table->enum('type', [
+                'driver',
+                'fuel',
+                'insurance',
+                'additional_service'
+            ]);
             $table->timestamps();
         });
     }

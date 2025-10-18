@@ -11,4 +11,11 @@ class Addon extends Model
 
     protected $guarded = ['id'];
 
+    public function rentals()
+    {
+        return $this->belongsToMany(Rental::class, 'rental_addons')
+                    ->withPivot('quantity', 'total_price')
+                    ->withTimestamps();
+    }
+
 }
