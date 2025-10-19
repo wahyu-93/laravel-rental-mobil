@@ -37,11 +37,11 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-        // Menambahkan data user yang sedang login
-        'auth'  =>[
-            'user'      => \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user() : null,
-            // 'isAdmin'   => Auth::check() && Auth::user()->hasRole('admin'),
-        ],
-    ]);
+            // Menambahkan data user yang sedang login
+            'auth'  => [
+                'user'      => Auth::user() ? Auth::user() : null,
+                'isAdmin'   => Auth::check() && Auth::user()->hasRole('admin'),
+            ],
+        ]);
     }
 }
