@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,6 +42,13 @@ class Rental extends Model
         return $this->belongsToMany(Addon::class, 'rental_addons')
             ->withPivot('quantity', 'total_price')
             ->withTimestamps();
+    }
+
+    public function lateFeePaymentProof(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value ? url('/storage/late_fee_proofs/' . $value) : null,
+        );
     }
 
 }
