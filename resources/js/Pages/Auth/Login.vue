@@ -87,6 +87,11 @@
             </div>
         </form>
 
+        <!-- link forget password -->
+        <div class="text-center mt-3">
+            <a href="/forgot-password" class="text-primary">Forgot Password?</a>
+        </div>
+
         <div class="text-center mt-3">
             <p>Don't have an account? <a href="/register" class="text-primary">Register here</a></p>
         </div>
