@@ -1,7 +1,7 @@
 <script setup>
     import LayoutAuth from '../../Layouts/Auth.vue';
 
-    import { Head } from '@inertiajs/vue3';
+    import { Head, router } from '@inertiajs/vue3';
     import { reactive } from 'vue';
 
     // define layout
@@ -35,7 +35,22 @@
 
     function submit()
     {
+        const formData = new FormData();
+        formData.append('name',form.name);
+        formData.append('email',form.email);
+        formData.append('password',form.password);
+        formData.append('password_confirmation',form.password_confirmation);
+        formData.append('gender',form.gender);
+        formData.append('address',form.address);
+        formData.append('whatsapp_number',form.whatsapp_number);
+        
+        if(form.image){
+            formData.append('image', form.image);
+        };
 
+        // console.log([...formData.entries()]);
+
+        router.post('/register', formData);
     }
 </script>
 
@@ -160,7 +175,7 @@
             <div class="d-grid">
                 <button class="btn btn-gray-800" type="submit">Register</button>
             </div>
-            
+
         </form>
     </div>
 </template>
