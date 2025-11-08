@@ -1,74 +1,166 @@
+<script setup>
+    import LayoutAuth from '../../Layouts/Auth.vue';
+
+    import { Head } from '@inertiajs/vue3';
+    import { reactive } from 'vue';
+
+    // define layout
+    defineOptions({
+        layout: LayoutAuth
+    })
+
+    const props = defineProps({
+        errors: Object
+    })
+
+    const form = reactive({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        gender: '',
+        address: '',
+        whatsapp_number: '',
+        image: null
+    })
+
+    function handleImageChange(event)
+    {
+        const file = event.target.files[0];
+
+        if (file){
+            form.image = file
+        }
+    }
+
+    function submit()
+    {
+
+    }
+</script>
+
 <template>
     <Head>
         <title>Register - Bee Rental Mobil</title>
     </Head>
-    
-    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+
+    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-750">
         <div class="text-center text-md-center mb-4 mt-md-0">
             <h3>Register</h3>
         </div>
+
+        <form class="mt-4" @submit.prevent="submit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Name Input -->
+                    <div class="form-group mb-4">
+                        <label for="name">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control" v-model="form.name" placeholder="Full Name">
+                        </div>
+                        <div v-if="errors.name" class="alert alert-danger mt-2">
+                            {{ errors.name }}
+                        </div>
+                    </div>
+        
+                     <!-- Name Input -->
+                    <div class="form-group mb-4">
+                        <label for="name">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control" v-model="form.email" placeholder="Email Address">
+                        </div>
+                        <div v-if="errors.email" class="alert alert-danger mt-2">
+                            {{ errors.email }}
+                        </div>
+                    </div>
+        
+                     <!-- Password Input -->
+                    <div class="form-group mb-4">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input type="password" placeholder="Password" class="form-control" v-model="form.password">
+                        </div>
+                        <div v-if="errors.password" class="alert alert-danger mt-2">
+                            {{ errors.password }}
+                        </div>
+                    </div>
+        
+                    <!-- Password Confirmation Input -->
+                    <div class="form-group mb-4">
+                        <label for="password_confirmation">Confirm Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon3">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input type="password" placeholder="Confirm Password" class="form-control" v-model="form.password_confirmation">
+                        </div>
+                        <div v-if="errors.password_confirmation" class="alert alert-danger mt-2">
+                            {{ errors.password_confirmation }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- Gender Input -->
+                    <div class="form-group mb-4">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" v-model="form.gender">
+                            <option value="">Select Gender</option>
+                            <option value="Pria">Pria</option>
+                            <option value="Wanita">Wanita</option>
+                        </select>
+                        <div v-if="errors.gender" class="alert alert-danger mt-2">
+                            {{ errors.gender }}
+                        </div>
+                    </div>
+
+                    <!-- Address Input -->
+                    <div class="form-group mb-4">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" v-model="form.address" placeholder="Enter your address"></textarea>
+                        <div v-if="errors.address" class="alert alert-danger mt-2">
+                            {{ errors.address }}
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Number Input -->
+                    <div class="form-group mb-4">
+                        <label for="whatsapp_number">WhatsApp Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon4">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <input type="text" class="form-control" v-model="form.whatsapp_number" placeholder="WhatsApp Number">
+                        </div>
+                        <div v-if="errors.whatsapp_number" class="alert alert-danger mt-2">
+                            {{ errors.whatsapp_number }}
+                        </div>
+                    </div>
+
+                    <!-- Image Input -->
+                    <div class="form-group mb-4">
+                        <label for="image">Upload ID Card</label>
+                        <input type="file" class="form-control" @change="handleImageChange">
+                        <div v-if="errors.image" class="alert alert-danger mt-2">
+                            {{ errors.image }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-gray-800" type="submit">Register</button>
+            </div>
+            
+        </form>
     </div>
 </template>
-
-<script>
-    //import layout
-    import LayoutAuth from '../../Layouts/Auth.vue';
-
-    //import Inertia
-    import {
-        Head,
-        router
-    } from '@inertiajs/vue3';
-
-    //import reactive
-    import {
-        reactive
-    } from 'vue';
-
-    export default {
-
-        //layout
-        layout: LayoutAuth,
-
-        //register component
-        components: {
-            Head
-        },
-
-        //props
-        props: {
-            errors: Object,
-        },
-
-        //define composition API
-        setup() {
-
-            //define form state
-            const form = reactive({
-                email: '',
-                password: '',
-            });
-
-            //submit method
-            const submit = () => {
-
-                //send data to server
-                router.post('/login', {
-
-                    //data
-                    email: form.email,
-                    password: form.password,
-                });
-            }
-
-            //return form state and submit method
-            return {
-                form,
-                submit,
-            };
-
-        }
-
-    }
-
-</script>
