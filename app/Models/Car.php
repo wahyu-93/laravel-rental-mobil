@@ -32,4 +32,9 @@ class Car extends Model
             get: fn($image) => url('/storage/cars/' . $image),
         );
     }
+
+    public function rentals()
+    {
+        return $this->hasMany(Rental::class);
+    }
 }

@@ -23,7 +23,7 @@
                 <li class="nav-item">
                     <span class="mt-2 d-flex justify-content-between">
                         <span>
-                            <span class="sidebar-text fw-bold">BeeCar</span>
+                            <span class="sidebar-text fw-bold">Bee Rental Car</span>
                         </span>
                     </span>
                 </li>
@@ -31,8 +31,8 @@
                 <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
                 <!-- Dashboard -->
-                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
-                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('/admin/dashboard') }">
+                    <Link href="/admin/dashboard" class="nav-link d-flex justify-content-between align-items-center">
                         <span>
                             <span class="sidebar-icon">
                                 <i class="fa fa-tachometer-alt icon icon-xs me-2"></i>
