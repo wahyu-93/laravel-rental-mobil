@@ -19,7 +19,7 @@
         const total = props.rentalStats.total_rentals;
         if(total === 0) return 0;
 
-        const count = props.rentalStats.status_count[status] || 0;
+        const count = props.rentalStats.status_counts[status] || 0;
         return Math.round((count/total) * 100);
     }
 </script>

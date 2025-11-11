@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,8 @@ Route::post('/logout', LogoutController::class)->name('logout')->middleware('aut
 Route::prefix('admin')->group(function(){
     Route::group(['middleware' => ['auth', 'role:admin']], function(){
         Route::get('/dashboard', DashboardController::class)->name('admin.dashboard');
+
+        // slider
+        Route::resource('/sliders', SliderController::class, ['as' => 'admin'])->only(['index', 'store', 'destroy']);
     });
 });

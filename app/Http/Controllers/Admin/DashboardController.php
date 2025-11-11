@@ -48,7 +48,7 @@ class DashboardController extends Controller
             'rentalStats' => [
                 'total_rentals' => $totalRentals,
                 'total_revenue' => $totalRevenue,
-                'total_late_fee' => $totalLateFees,
+                'total_late_fees' => $totalLateFees,
                 'status_counts' => [
                     'pending'   => $pendingRentals,
                     'approved'  => $approvedRentals,

@@ -45,8 +45,8 @@
                 <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-700"></li>
 
                 <!-- Sliders -->
-                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
-                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('/admin/sliders') }">
+                    <Link href="/admin/sliders" class="nav-link d-flex justify-content-between align-items-center">
                         <span>
                             <span class="sidebar-icon">
                                 <i class="fa fa-sliders-h icon icon-xs me-2"></i>
@@ -114,6 +114,44 @@
                                 <i class="fa fa-star icon icon-xs me-2"></i>
                             </span>
                             <span class="sidebar-text">Reviews</span>
+                        </span>
+                    </Link>
+                </li>
+
+                <li role="separator" class="dropdown-divider mt-2 mb-2 border-gray-700"></li>
+
+                <!-- site setting -->
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
+                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                        <span>
+                            <span class="sidebar-icon">
+                                <i class="fa fa-cog icon icon-xs me-2"></i>
+                            </span>
+                            <span class="sidebar-text">Site Settings</span>
+                        </span>
+                    </Link>
+                </li>
+
+                <!-- template message -->
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
+                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                        <span>
+                            <span class="sidebar-icon">
+                                <i class="fa fa-envelope-open-text icon icon-xs me-2"></i>
+                            </span>
+                            <span class="sidebar-text">Template Messages</span>
+                        </span>
+                    </Link>
+                </li>
+
+                <!-- Laporan -->
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
+                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                        <span>
+                            <span class="sidebar-icon">
+                                <i class="fa fa-chart-bar icon icon-xs me-2"></i>
+                            </span>
+                            <span class="sidebar-text">Laporan Penyewaan</span>
                         </span>
                     </Link>
                 </li>
