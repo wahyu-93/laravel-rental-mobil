@@ -56,6 +56,18 @@
                     </Link>
                 </li>
 
+                 <!-- catgories -->
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('/admin/categories') }">
+                    <Link href="/admin/categories" class="nav-link d-flex justify-content-between align-items-center">
+                        <span>
+                            <span class="sidebar-icon">
+                                <i class="fa fa-tags icon icon-xs me-2"></i>
+                            </span>
+                            <span class="sidebar-text">Category</span>
+                        </span>
+                    </Link>
+                </li>
+
                 <!-- Cars -->
                 <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
                     <Link href="" class="nav-link d-flex justify-content-between align-items-center">

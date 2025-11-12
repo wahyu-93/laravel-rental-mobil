@@ -1,5 +1,5 @@
 <script setup>
-    import { onMounted, reactive } from 'vue';
+    import { reactive } from 'vue';
     import Swal from "sweetalert2";
     import LayoutAdmin from '../../../Layouts/Admin.vue';
     import Pagination from '../../../Components/Pagination.vue';
@@ -16,10 +16,6 @@
 
     const formData = reactive({
         image: null
-    })
-
-    onMounted(() => {
-        console.log(props.sliders)
     })
 
     function handleFileUpload(event)
@@ -101,7 +97,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 d-flex justify-content-end mb-3">
+                                <div class="col-md-12 d-flex justify-content-end mb-3 mt-2">
                                     <button
                                     type="submit"
                                     class="btn btn-primary w-100 shadow custom-button">
@@ -146,6 +142,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                         <!-- Pagination Component -->
                         <Pagination :links="sliders.links" align="end" />
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -29,5 +30,8 @@ Route::prefix('admin')->group(function(){
 
         // slider
         Route::resource('/sliders', SliderController::class, ['as' => 'admin'])->only(['index', 'store', 'destroy']);
+
+        // category
+        Route::resource('/categories', CategoryController::class, ['as' => 'admin'])->except('show');
     });
 });
