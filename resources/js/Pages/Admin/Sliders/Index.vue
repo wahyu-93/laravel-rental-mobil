@@ -70,7 +70,7 @@
 
 <template>
     <Head>
-        <title>Sliders - Rental Mobil</title>
+        <title>Sliders - Bee Rental Mobil</title>
     </Head>
     <div class="container-fluid mb-5 mt-5">
         <div class="row">

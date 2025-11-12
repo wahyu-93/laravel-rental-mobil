@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->paginate(10);
-
+        
         return inertia('Admin/Categories/Index',[
             'categories' =>  $categories
         ]);  
@@ -25,10 +25,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255'
+            'name' => 'required|string|max:255|unique:categories,name'
+        ]);
+    
+        Category::create([
+            'name' => $request->name,
         ]);
 
-        Category::create($request->name);
         return redirect()->route('admin.categories.index');
     }
 
