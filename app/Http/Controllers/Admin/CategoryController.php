@@ -37,22 +37,25 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::where('slug', $id)->firstOrFail();
 
-        return inertia('Admin/Category/Edit',[
+        return inertia('Admin/Categories/Edit',[
             'category' => $category,
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::where('slug', $id)->firstOrFail();
         
         $request->validate([
-            'nama' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
         ]);
 
-        $category->update($request->name);
+        $category->update([
+            'name' => $request->name
+        ]);
+
         return redirect()->route('admin.categories.index');
     }
 

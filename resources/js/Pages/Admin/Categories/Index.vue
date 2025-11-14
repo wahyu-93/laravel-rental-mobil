@@ -1,7 +1,8 @@
 <script setup>
     import LayoutAdmin from '../../../Layouts/Admin.vue';
     import Pagination from '../../../Components/Pagination.vue';
-    import { Link, Head } from '@inertiajs/vue3';
+    import { Link, Head, router } from '@inertiajs/vue3';
+    import Swal from 'sweetalert2';
 
 
     defineOptions({
@@ -11,6 +12,32 @@
     const props = defineProps({
         categories: Object
     })
+
+    function destroy(id)
+    {
+        Swal.fire({
+            title: 'Apakah Anda Yakin',
+            text: 'Data yang terhapus tidak bisa dikembalikan!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        })
+        .then((result) => {
+            if(result.isConfirmed){
+                router.delete(`/admin/categories/${id}`);
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Category Berhasil Dihapus',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+            }
+        })
+    }
+
 </script>
 
 <template>
@@ -39,9 +66,10 @@
                             <table class="table table-bordered table-centered table-nowrap mb-0 rounded">
                                 <thead class="thead-dark">
                                     <tr class="border-0">
-                                        <th>No</th>
+                                        <th class="border-0 rounded-start">No</th>
                                         <th>Category Name</th>
                                         <th>Slug</th>
+                                        <th class="border-0 rounded-end" style="width: 20%;">Actions</th>
                                     </tr>
                                 </thead>
 
@@ -50,10 +78,17 @@
                                         <td class="fw-bold text-center">{{ index + 1 + (categories.current_page - 1) * categories.per_page }}</td>
                                         <td>{{ category.name }}</td>
                                         <td>{{ category.slug }}</td>
+                                        <td class="text-center">
+                                            <Link class="btn btn-warning btn-sm" :href="`/admin/categories/${category.slug}/edit`">
+                                                Edit
+                                            </Link>
+
+                                            <button class="btm btn-danger btn-sm ms-2 border-0" @click.prevent="destroy(category.id)">Delete</button>
+                                        </td>
                                     </tr> 
 
                                     <tr v-if="categories.data.length === 0">
-                                        <td colspan="3" class="text-center">No Categories Found</td>
+                                        <td colspan="4" class="text-center">No Categories Found</td>
                                     </tr>
                                 </tbody>
                             </table>

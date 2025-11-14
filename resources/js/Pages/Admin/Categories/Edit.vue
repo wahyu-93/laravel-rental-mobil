@@ -8,19 +8,21 @@
         layout: LayoutAdmin
     })
 
-    const form = ref({
-        name: ''
-    })
-    
+    // disini nilainya berasal dari kiriman controller
     const props = defineProps({
+        category: Object,
         errors: Object
+    })
+
+    const form = ref({
+        name: props.category.name
     })
 
     function submitForm()
     {
-        router.post('/admin/categories', form.value, {
+        router.put(`/admin/categories/${props.category.slug}`, form.value, {
             onSuccess: () => {
-                Swal.fire('Success!', 'Category Berhasil Ditambahkan', 'success').then(() => {
+                Swal.fire('Success!', 'Category Berhasil Diperbarui', 'success').then(() => {
                     window.location.href = '/admin/categories';
                 })
             }
@@ -30,7 +32,7 @@
 
 <template>
     <Head>
-        <title>Create Category - Bee Rental Mobil</title>
+        <title>Edit Category - Bee Rental Mobil</title>
     </Head>
 
     <div class="container-fluid mt-5 mb-5">
@@ -49,7 +51,7 @@
 
                             <div class="d-flex justify-content-end mt-3">
                                 <Link class="btn btn-info me-2" href="/admin/categories">Batal</Link>
-                                <button class="btn btn-primary">Simpan</button>
+                                <button class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>

@@ -12,6 +12,11 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -23,6 +28,5 @@ class Category extends Model
         static::updating(function($model){
             $model->slug = Str::slug($model->name);
         });
-
     }
 }
