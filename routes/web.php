@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SliderController;
@@ -33,5 +34,8 @@ Route::prefix('admin')->group(function(){
 
         // category
         Route::resource('/categories', CategoryController::class, ['as' => 'admin'])->except('show');
+
+        // car
+        Route::resource('/cars', CarController::class, ['as' => 'admin'])->except('show');
     });
 });

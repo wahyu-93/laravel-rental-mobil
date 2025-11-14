@@ -69,8 +69,8 @@
                 </li>
 
                 <!-- Cars -->
-                <li class="nav-item" :class="{ 'active': $page.url.startsWith('') }">
-                    <Link href="" class="nav-link d-flex justify-content-between align-items-center">
+                <li class="nav-item" :class="{ 'active': $page.url.startsWith('/admin/cars') }">
+                    <Link href="/admin/cars" class="nav-link d-flex justify-content-between align-items-center">
                         <span>
                             <span class="sidebar-icon">
                                 <i class="fa fa-car icon icon-xs me-2"></i>

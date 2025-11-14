@@ -13,16 +13,21 @@ class Car extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public static function boot()
     {
         parent::boot();
 
         static::creating(function($model){
-            $model->slug = Str::slug($model->name);
+            $model->slug = Str::slug($model->brand);
         });
 
         static::updating(function($model){
-            $model->slug = Str::slug($model->name);
+            $model->slug = Str::slug($model->brand);
         });
     }
 
