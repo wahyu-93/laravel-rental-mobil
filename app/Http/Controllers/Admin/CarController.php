@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Car\StoreRequest;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -36,25 +38,34 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $car = $request->validated();
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image->storeAs('cars', $image->hashName(), 'public');
+            $car['image'] = $image->hashName();
+        };
+
+        Car::create($car);
+
+        return redirect()->route('admin.cars.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        //
+        $car = Car::where('slug', $slug)->firstOrFail();
+        $categories = Category::all();
+
+        return inertia('Admin/Cars/Edit',[
+            'cars'  => $car,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -70,6 +81,13 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+
+        if($car->image){
+            Storage::disk('local')->delete('public/cars/' . basename($car->image));
+        };
+
+        $car->delete();
+        return redirect()->route('admin.cars.edit');
     }
 }
