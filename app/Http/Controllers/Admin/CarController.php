@@ -40,7 +40,7 @@ class CarController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $car = $request->validated();
+        $car = $request->all();
 
         if($request->hasFile('image')){
             $image = $request->file('image');

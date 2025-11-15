@@ -1,7 +1,8 @@
 <script setup>
-    import { Head, Link } from '@inertiajs/vue3';
+    import { Head, Link, router } from '@inertiajs/vue3';
     import LayoutAdmin from '../../../Layouts/Admin.vue'; 
     import { reactive } from 'vue';
+    import Swal from 'sweetalert2';
 
     defineOptions({
         layout: LayoutAdmin
@@ -33,7 +34,29 @@
 
     function submit()
     {
-        alert('addad')
+        const payload = new FormData();
+
+        for(const key in formData){
+            payload.append(key, formData[key])
+        };
+
+        router.post('/admin/cars', payload, {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Car has been added successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                });
+            },
+        });
+
+
+        // melihat isi reactive
+        // console.log(toRaw(formData))
+
+        // meliha isi payloa(FormData())
+        // console.log("ISI PAYLOAD:", Object.fromEntries(payload));
     }
 </script>
 
@@ -183,7 +206,7 @@
 
                                     <!-- penalty_rate_per_day -->
                                     <div class="form-group mb-3">
-                                        <label for="penalty_rate_per_day" class="form-label">Penalty Rate Per Day</label>
+                                        <label for="penalty_rate_per_day" class="form-label">Penalty Rate Per Day (Rp)</label>
                                         <input type="number" id="penalty_rate_per_day" v-model="formData.penalty_rate_per_day" class="form-control">
 
                                         <div v-if="errors.penalty_rate_per_day" class="alert alert-danger mt-2">

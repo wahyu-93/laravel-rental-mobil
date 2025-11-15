@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
             'model'         => 'required|string|max:255',
             'license_plate' => 'required|string|max:255',
             'transmission'  => 'required|string|max:255',
-            'year'          => 'required|integer|min:1900'|'max:' .date('Y'),
+            'year'          => 'required|integer|min:1900|max:' .date('Y'),
             'daily_rate'    => 'required|numeric|min:0',
             'penalty_rate_per_day'  => 'required|numeric|min:0',
             'passenger_capacity'    => 'required|integer|min:1',
