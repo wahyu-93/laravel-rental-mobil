@@ -6,7 +6,6 @@
 
     defineOptions ({
         layout: LayoutAdmin
-
     })
 
     const props = defineProps({
@@ -55,14 +54,20 @@
 
                                 <tbody>
                                     <tr v-for="(car, index) in cars.data" :key="car.id">
-                                        <td class="fw-bold text-cente">{{ index + 1 + (cars.current_page - 1) * cars.per_age }}</td>
+                                        <td class="fw-bold text-cente">{{ index + 1 + (cars.current_page - 1) * cars.per_page }}</td>
                                         <td>{{ car.brand }}</td>
                                         <td>{{ car.model }}</td>
                                         <td>{{ car.license_plate }}</td>
                                         <td>{{ car.year }}</td>
                                         <td>{{ car.fuel_type }}</td>
                                         <td>{{ formatCurrency(car.daily_rate) }}</td>
-                                        <td></td>
+                                        <td class="text-center">
+                                            <Link class="btn btn-sm btn-warning" :href="`/admin/cars/${car.slug}/edit`">
+                                                Edit
+                                            </Link>
+
+                                            <button type="button" class="btn btn-danger btn-sm ms-2">Delete</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

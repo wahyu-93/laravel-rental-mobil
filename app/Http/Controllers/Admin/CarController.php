@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Car\StoreRequest;
+use App\Http\Requests\Admin\Car\UpdateRequest;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -71,9 +72,27 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $slug)
     {
-        //
+        $car = Car::where('slug', $slug)->firstOrFail();
+
+        $data = $request->all();
+
+        // cek image, kalo ada hapus image terdahulu
+        if($request->hasFile('image')){
+            if($car->image){
+                Storage::disk('public')->delete('cars/' . basename($car->image));
+            };
+
+            // image baru
+            $image = $request->file('image');
+            $image->storeAs('cars', $image->hashName(), 'public');
+            $data['image'] = $image->hashName();
+        };
+
+        $car->update($data);
+
+        return redirect()->route('admin.cars.index');
     }
 
     /**
